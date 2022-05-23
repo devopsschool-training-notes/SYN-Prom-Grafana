@@ -1,0 +1,15 @@
+LAB - https://www.devopsschool.com/blog/install-and-configure-prometheus-server-and-node-exporter-in-rhel/
+
+
+ 12  cd /opt/prometheus-2.28.1.linux-amd64
+   13  ls
+   14  more prometheus.yml
+   15  i
+   16  clear
+   17  ls
+   18  nohup ./prometheus > prometheus.log 2>&1 &
+   19  ls
+   20  ps -eaf | grep prom
+   21  ls
+   22  tail -f prometheus.log
+   23  ip a
