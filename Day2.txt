@@ -56,6 +56,11 @@ scrape_configs:
 
 
 
+  - job_name: apache
+    static_configs:
+    - targets: ['13.126.201.158:9117']
+
+
 
 
 - Apache Web
@@ -64,3 +69,34 @@ scrape_configs:
 - jvm
 =====================
 - Client Lib
+
+
+
+Prom RULES
+==========================
+https://www.devopsschool.com/blog/recording-rules-and-alerting-rules-exmplained-in-prometheus/
+
+
+
+groups:
+  - name: custom_rules
+    rules:
+      - record: node_memory_MemFree_percent
+        expr: 100 - (100 * node_memory_MemFree_bytes / node_memory_MemTotal_bytes)
+      - record: node_memory_MemFree_percent1
+        expr: 100 - (100 * node_memory_MemFree_bytes / node_memory_MemTotal_bytes)
+      - record: node_memory_MemFree_percent2
+        expr: 100 - (100 * node_memory_MemFree_bytes / node_memory_MemTotal_bytes)
+
+
+./promtool check rules first_rules.yml
+
+https://www.devopsschool.com/blog/recording-rules-and-alerting-rules-exmplained-in-prometheus/
+
+
+
+
+
+
+
+
