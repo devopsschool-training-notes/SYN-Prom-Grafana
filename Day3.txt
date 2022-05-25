@@ -1,0 +1,86 @@
+https://www.devopsschool.com/blog/working-with-prometheus-alert-manager-tutorials/
+
+Step 1 - Install and Configure Alert Manager
+
+Step 2 - Add Rules in prom config file
+
+step 3 - Add Alert managers in prom config file
+
+node_filesystem_avail_bytes{mountpoint="/", fstype="xfs"} <= 6519140359
+
+
+
+
+node_filesystem_avail_bytes{device="/dev/mapper/centos-root", fstype="xfs", instance="192.168.1.13:9100", job="linux", mountpoint="/"}
+24933220352 <= 6519140359
+6519140359
+
+
+24931229696 <= 
+6519140359
+
+
+651914035978
+
+
+
+groups:
+  - name: custom_rules
+    rules:
+      - alert: DiskSpaceFree10Percent
+        expr: node_filesystem_avail_bytes{mountpoint="/", fstype="xfs"} <= 6519140359
+        labels:
+          severity: warning
+        annotations:
+          summary: "Instance [{{ $labels.instance }}] has 10% or less Free disk space"
+          description: "[{{ $labels.instance }}] has only {{ $value }}% or less free."
+
+
+
+
+route:
+  group_by: ['alertname']
+  receiver: smtp-local
+receivers:
+  - name: 'smtp-local'
+    email_configs:
+    - to: 'your email address'
+      from: 'your email from address'
+      require_tls: false
+      smarthost: localhost:25
+      send_resolved: true
+   slack_configs:
+     - channel: '#monitoring-instances'
+       send_resolved: true
+  - name: 'smtp-local1'
+    email_configs:
+    - to: 'your email address'
+      from: 'your email from address'
+      require_tls: false
+      smarthost: localhost:25
+      send_resolved: true
+  - name: 'smtp-local1'
+    email_configs:
+    - to: 'your email address'
+      from: 'your email from address'
+      require_tls: false
+      smarthost: localhost:25
+      send_resolved: true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
