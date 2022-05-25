@@ -1,10 +1,12 @@
 https://www.devopsschool.com/blog/working-with-prometheus-alert-manager-tutorials/
 
-Step 1 - Install and Configure Alert Manager
+### Step 1 - Install and Configure Alert Manager
 
-Step 2 - Add Rules in prom config file
+### Step 2 - Add Alert Rules in prometheus config file(prometheus.yml)
 
-step 3 - Add Alert managers in prom config file
+### step 3 - Add Alert managers target in prometheus config file(prometheus.yml)
+
+### Step 4 - Modify alertmanager.yml to add Notificaion Channel
 
 node_filesystem_avail_bytes{mountpoint="/", fstype="xfs"} <= 6519140359
 
@@ -69,16 +71,22 @@ receivers:
 
 
 
+https://www.devopsschool.com/blog/prometheus-pushgateway-installation-configuration-and-using-tutorials/
 
 
 
 
 
 
+  - job_name: 'pushgateway'
+    honor_labels: true
+    static_configs:
+      - targets: ['localhost:9091']
 
 
-
-
+echo "cpu_utilization 20.25" | curl --data-binary @- http://localhost:9091/metrics/job/my_custom_metrics/instance/192.168.1.13:9000/provider/hetzner
+echo "cpu_utilization 40.25" | curl --data-binary @- http://localhost:9091/metrics/job/my_custom_metrics/instance/192.168.1.13:9000/provider/hetzner
+echo "cpu_utilization 60.25" | curl --data-binary @- http://localhost:9091/metrics/job/my_custom_metrics/instance/192.168.1.13:9000/provider/hetzner
 
 
 
